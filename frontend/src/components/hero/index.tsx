@@ -28,7 +28,7 @@ export default function Hero({ movies }: Movies) {
   return (
     <MovieCarouselContainer>
       <Carousel>
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <Paper key={movie.imdbId}>
             <MovieCardContainer>
               <MovieCard img={movie.backdrops[0]}>

@@ -18,5 +18,5 @@ export interface MovieInterface {
 }
 
 export interface Movies {
-  movies: MovieInterface[];
+  movies: MovieInterface[] | undefined;
 }

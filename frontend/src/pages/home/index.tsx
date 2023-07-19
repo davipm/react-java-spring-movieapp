@@ -1,6 +1,12 @@
 import Hero from "../../components/hero";
-import { Movies } from "../../types";
+import { MovieInterface } from "../../types";
 
-export default function Home({ movies }: Movies) {
+type Props = {
+  movies: MovieInterface[] | undefined;
+  loading: boolean;
+};
+
+export default function Home({ movies, loading }: Props) {
+  if (loading) return <p>Loading...</p>;
   return <Hero movies={movies} />;
 }
