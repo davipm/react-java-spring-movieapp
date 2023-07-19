@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import Header from "./components/header";
+import { GlobalStyle } from "./styles/global.ts";
+import Home from "./pages/home";
+import Trailer from "./pages/trailer";
+import Reviews from "./pages/reviews";
+import NotFound from "./pages/notFound";
+import { SetStateAction, useEffect, useState } from "react";
+import { api } from "./services/api.ts";
+import { MovieInterface } from "./types";
+
+export default function App() {
+  const [movies, setMovies] = useState<MovieInterface[]>([]);
+  // const [movie, setMovie] = useState();
+  // const [reviews, setReviews] = useState([]);
+
+  async function getMovies() {
+    try {
+      const response = await api.get<SetStateAction<MovieInterface[]>>(
+        "/api/v1/movies",
+      );
+      setMovies(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <Header />
 
-export default App
+      <Routes>
+        <Route index element={<Home movies={movies} />} />
+        <Route path="trailer/:ytTrailerId" element={<Trailer />} />
+        <Route path="reviews/:movieId" element={<Reviews />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+      <GlobalStyle />
+    </div>
+  );
+}
