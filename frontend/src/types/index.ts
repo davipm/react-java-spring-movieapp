@@ -1,4 +1,4 @@
-interface ReviewInterface {
+export interface ReviewInterface {
   id: string;
   body: string;
   created: string;
@@ -15,6 +15,7 @@ export interface MovieInterface {
   genres: string[];
   backdrops: string[];
   reviewIds: ReviewInterface[];
+  reviews: ReviewInterface[];
 }
 
 export interface Movies {
