@@ -40,7 +40,7 @@ export default function Reviews() {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <Container>
+    <Container className="mt-5">
       <Row>
         <Col>
           <h3>Reviews</h3>

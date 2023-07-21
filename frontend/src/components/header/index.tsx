@@ -15,8 +15,12 @@ export default function Header() {
         <Navbar.Toggle aria-controls="navbarControll" />
         <Navbar.Collapse id="navbarScroll">
           <CustomNav className="me-auto my-2 my-lg-0">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/watchlist">Watch List</NavLink>
+            <NavLink to="/" className="nav-link">
+              Home
+            </NavLink>
+            <NavLink to="/watchlist" className="nav-link">
+              Watch List
+            </NavLink>
           </CustomNav>
           <Button variant="outline-info" className="me-2">
             Login
