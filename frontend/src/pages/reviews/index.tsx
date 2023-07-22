@@ -11,6 +11,11 @@ interface IFormInput {
   reviewBody: string;
 }
 
+type MutationProps = {
+  reviewBody: string;
+  imdbId: string | undefined;
+};
+
 export default function Reviews() {
   const queryClient = useQueryClient();
   const { movieId } = useParams();
@@ -23,8 +28,7 @@ export default function Reviews() {
   });
 
   const createNewReview = useMutation(
-    (value: { reviewBody: string; imdbId: string | undefined }) =>
-      api.post(`/api/v1/reviews`, { ...value }),
+    (value: MutationProps) => api.post(`/api/v1/reviews`, { ...value }),
     {
       onSuccess: async () => {
         await queryClient.invalidateQueries("movie");
