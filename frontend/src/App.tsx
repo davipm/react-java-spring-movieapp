@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 
+import { useMovies } from "./hooks";
 import Header from "./components/header";
-import { GlobalStyle } from "./styles/global.ts";
 import Home from "./pages/home";
 import Trailer from "./pages/trailer";
 import Reviews from "./pages/reviews";
 import NotFound from "./pages/notFound";
-import { useMovies } from "./hooks";
+
+import GlobalStyle from "./styles/global.ts";
 
 export default function App() {
   const { data, isLoading } = useMovies();
