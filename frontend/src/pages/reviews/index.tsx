@@ -14,7 +14,7 @@ interface IFormInput {
 export default function Reviews() {
   const queryClient = useQueryClient();
   const { movieId } = useParams();
-  const { data, isLoading } = useMovie(movieId);
+  const { data, isLoading } = useMovie(movieId as string);
 
   const { control, handleSubmit, reset } = useForm({
     defaultValues: {
